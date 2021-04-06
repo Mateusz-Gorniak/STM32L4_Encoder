@@ -69,7 +69,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 	char buffer[64];
-	uint32_t counter;
+	int counter;
+	uint8_t previous_count;
 
   /* USER CODE END 1 */
 
@@ -101,9 +102,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
 	  counter = __HAL_TIM_GET_COUNTER(&htim2);
-	  sprintf((char*)buffer, "Odczyt: %d\n", counter);
-	  HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
+	  //sprintf((char*)buffer, "Odczyt: %d\n", counter);
+	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
+	  	  if(previous_count != counter){
+	  	  		  sprintf((char*)buffer, "Encoder Read Value: %d\n", counter);
+	  	  		  HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
+	  	  		  previous_count = counter;
+	  	  	  }
 	  HAL_Delay(500);
     /* USER CODE END WHILE */
 
