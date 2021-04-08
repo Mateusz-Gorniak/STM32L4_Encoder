@@ -112,8 +112,8 @@ int main(void)
 
 	  counter = __HAL_TIM_GET_COUNTER(&htim2);
 	  //h = __HAL_TIM_GET_COUNTER(&htim2);
-	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2,counter*5);
-	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3,counter*5);
+	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2,0);
+	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3,100);
 	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4,counter*5);
 	  //sprintf((char*)buffer, "Odczyt: %d\n", counter);
 	  //HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
@@ -122,9 +122,16 @@ int main(void)
 	  	  		  sprintf((char*)buffer, "Encoder Read Value: %d \n", counter);
 	  	  		  HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
 
+	  	  		  if(counter == 0){
+	  	  			  HAL_GPIO_WritePin(GPIOB, LED_BLUE_Pin, GPIO_PIN_SET);
+	  	  		  }
+	  	  		  else{
+	  	  			  HAL_GPIO_WritePin(GPIOB, LED_BLUE_Pin, GPIO_PIN_RESET);
+	  	  		  }
+
 	  	  		  previous_count = counter;
 	  	  	  }
-	  HAL_Delay(500);
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
