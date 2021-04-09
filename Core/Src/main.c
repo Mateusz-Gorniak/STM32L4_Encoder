@@ -73,6 +73,7 @@ int main(void)
 	uint8_t previous_count;
 	uint32_t h;
 	uint16_t s =100 ,v = 0;
+	char * zero_flag ="0 position detected [!] \n";
 
 
   /* USER CODE END 1 */
@@ -123,7 +124,8 @@ int main(void)
 	  	  		  HAL_UART_Transmit(&hlpuart1, (uint8_t*)buffer, strlen(buffer), 1000);
 
 	  	  		  if(counter == 0){
-	  	  			  HAL_GPIO_WritePin(GPIOB, LED_BLUE_Pin, GPIO_PIN_SET);
+	  	  			 HAL_GPIO_WritePin(GPIOB, LED_BLUE_Pin, GPIO_PIN_SET);
+	  	  			 HAL_UART_Transmit(&hlpuart1, zero_flag, strlen(zero_flag), 1000);
 	  	  		  }
 	  	  		  else{
 	  	  			  HAL_GPIO_WritePin(GPIOB, LED_BLUE_Pin, GPIO_PIN_RESET);
@@ -131,7 +133,7 @@ int main(void)
 
 	  	  		  previous_count = counter;
 	  	  	  }
-	  HAL_Delay(100);
+	  HAL_Delay(70);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
