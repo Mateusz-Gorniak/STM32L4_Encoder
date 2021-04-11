@@ -134,6 +134,7 @@ int main(void)
 	  	  		  previous_count = counter;
 	  	  	  }
 	  HAL_Delay(70);
+	  HAL_GPIO_TogglePin(GPIOB, LED_RED_Pin);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
